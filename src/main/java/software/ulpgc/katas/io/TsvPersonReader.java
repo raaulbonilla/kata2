@@ -34,7 +34,7 @@ public class TsvPersonReader implements PersonReader {
             throw new IllegalArgumentException("El TSV no contiene personas");
         }
         List<Person> persons = new ArrayList<>();
-        for (int i = 1; i < lines.size(); i++ ) {
+        for (int i = 1; i < lines.size(); i++) {
             persons.add(loadFrom(lines.get(i)));
         }
         return persons;
@@ -46,6 +46,9 @@ public class TsvPersonReader implements PersonReader {
     }
 
     private static Person loadFrom(String[] fields) {
+        if (fields.length < 2 || fields[0].isBlank() || fields[1].isBlank()) {
+            throw new IllegalArgumentException("Faltan nombre o fecha");
+        }
         return new Person(fields[0], LocalDate.parse(fields[1]));
     }
 }
