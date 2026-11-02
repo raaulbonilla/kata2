@@ -27,4 +27,15 @@ public class TsvPersonReader implements PersonReader {
         }
         return loadFrom(lines);
     }
+
+    private List<Person> loadFrom(List<String> lines) {
+        if (lines.size() < 2) {
+            throw new IllegalArgumentException("El TSV no contiene personas");
+        }
+        List<Person> persons = new ArrayList<>();
+        for (int i = 1; i < lines.size(); i++ ) {
+            persons.add(loadFrom(lines.get(i)));
+        }
+        return persons;
+    }
 }
