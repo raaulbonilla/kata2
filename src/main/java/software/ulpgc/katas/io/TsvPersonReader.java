@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sun.tools.jdeprscan.scan.CPEntries.loadFrom;
-
 public class TsvPersonReader implements PersonReader {
 
     @Override
