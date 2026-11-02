@@ -4,6 +4,7 @@ import software.ulpgc.katas.Person;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,5 +38,14 @@ public class TsvPersonReader implements PersonReader {
             persons.add(loadFrom(lines.get(i)));
         }
         return persons;
+    }
+
+    private Person loadFrom(String line) {
+        String[] fields = line.split("\t", -1);
+        return loadFrom(fields);
+    }
+
+    private static Person loadFrom(String[] fields) {
+        return new Person(fields[0], LocalDate.parse(fields[1]));
     }
 }
