@@ -35,7 +35,11 @@ public class TsvPersonReader implements PersonReader {
         }
         List<Person> persons = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
-            persons.add(loadFrom(lines.get(i)));
+            try {
+                persons.add(loadFrom(lines.get(i)));
+            } catch (Exception e) {
+                throw new RuntimeException("Fila " + (i+1) + " incorrecta" ,e);
+            }
         }
         return persons;
     }
