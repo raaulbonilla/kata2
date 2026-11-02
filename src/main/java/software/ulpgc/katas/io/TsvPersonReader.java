@@ -2,12 +2,12 @@ package software.ulpgc.katas.io;
 
 import software.ulpgc.katas.Person;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.sun.tools.jdeprscan.scan.CPEntries.loadFrom;
 
 public class TsvPersonReader implements PersonReader {
 
@@ -15,5 +15,16 @@ public class TsvPersonReader implements PersonReader {
     public List<Person> readAll(InputStream input) throws IOException {
         Reader reader = new InputStreamReader(input, StandardCharsets.UTF_8);
         return loadFrom(reader);
+    }
+
+    private List<Person> loadFrom(Reader reader) throws IOException {
+        BufferedReader buffer = new BufferedReader(reader);
+        List<String> lines = new ArrayList<>();
+        String line = buffer.readLine();
+        while (line != null) {
+            lines.add(line);
+            line = buffer.readLine();
+        }
+        return loadFrom(lines);
     }
 }
