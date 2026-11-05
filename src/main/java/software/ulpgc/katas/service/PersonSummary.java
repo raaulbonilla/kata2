@@ -14,6 +14,6 @@ public class PersonSummary {
         }
         return "Personas: " + persons.size() + "\n" +
                 "Mayores de edad: " + adults + "\n" +
-                "Menores de edad: " + (adults - persons.size()) + "\n";
+                "Menores de edad: " + (persons.size() -adults) + "\n";
     }
 }
